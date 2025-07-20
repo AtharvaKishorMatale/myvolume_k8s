@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: myrset
+spec:
+    replicas: 3
+    selector:
+      matchLabels:
+         app: facebook
+    template:
+      metadata:
+        labels:
+          app: facebook
+      spec:
+        containers:
+         - image: nginx
+           name: mycont
+           ports:
+             - containerPort: 80
+           volumeMounts:
+             - name: mydata
+               mountPath: /usr/share/nginx/html
+        volumes:
+           - name: mydata
+             gitRepo:
+               repository: https://github.com/AtharvaKishorMatale/myvolume_k8s.git
+               revision: main
+               directory: .

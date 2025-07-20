@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+   name: my-cg
+spec:
+   schedule: "*/2 * * * *"
+   jobTemplate:
+     spec:
+       template:
+         metadata:
+           labels:
+             app: test
+         spec:
+           containers:
+             - image: busybox
+               name: mycont
+               command: ["sh","-c","echo 'hello' "]
+           restartPolicy: OnFailure

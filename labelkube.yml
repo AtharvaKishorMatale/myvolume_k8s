@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: newpod3
+   labels:
+      env: live
+spec:
+   containers:
+     - image: nginx
+       name: mycont
+       ports:
+         - containerPort: 80
